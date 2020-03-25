@@ -1,6 +1,6 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
-const fs = require('fs')
+const fs = require('fs').promises
 const calendar = require('googleapis')
 
 async function action () {
@@ -19,7 +19,7 @@ async function action () {
   const octokit = new github.GitHub(token)
   const context = github.context
 
-  const fetchedTemplate = fs.readFileSync(template)
+  const fetchedTemplate = await fs.readFile(template)
 
   // now, create a meeting issue
   try {
