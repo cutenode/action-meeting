@@ -2,18 +2,21 @@
   "name": "action-meeting",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard index.js",
+    "package": "ncc build index.js -o dist"
   },
   "keywords": [],
   "author": "Tierney Cyren <hello@bnb.im>",
   "license": "MIT",
   "devDependencies": {
+    "@zeit/ncc": "^0.22.0",
     "standard": "^14.3.3"
   },
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "@actions/github": "^2.1.1"
+    "@actions/github": "^2.1.1",
+    "googleapis": "^48.0.0"
   }
 }
