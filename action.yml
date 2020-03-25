@@ -3,7 +3,7 @@ author: Tierney Cyren (@bnb)
 description: A GitHub Action to create issues that detail meetings
 runs:
     using: 'node12'
-    main: 'dist/index.js'
+    main: 'index.js'
 inputs:
     markdown-join-instructions:
         description: 'Path to checked-in Markdown file detailing how folks can join the meeting. Generally, ~/.github/meeting/ is going to be the best location.'
