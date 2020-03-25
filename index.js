@@ -42,7 +42,7 @@ async function action () {
       observers: core.getInput('observers')
     }
 
-    const bodyToReturn = await replaceVariables(stringifiedTemplate)
+    const bodyToReturn = await replaceVariables(stringifiedTemplate, templateVariables, templateValues)
 
     core.info(fetchedTemplate)
 
