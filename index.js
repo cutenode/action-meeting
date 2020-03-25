@@ -1,7 +1,6 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const fs = require('fs').promises
-const calendar = require('googleapis')
 
 async function action () {
   // Starting off by pulling in all of our required inputs
