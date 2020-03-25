@@ -14,6 +14,9 @@ inputs:
     github-token:
         description: 'GitHub Token used for authentication. See the following link for more details: https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token'
         required: true
+    agenda-label:
+        description: 'GitHub label to build the agenda off of. All issues that'
+        required: true
     invites:
         description: 'String of people or teams to invite via @mention'
         required: false
