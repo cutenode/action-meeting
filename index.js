@@ -27,7 +27,7 @@ async function action () {
     await octokit.issues.create({
       ...context.repo,
       title: 'My Meeting',
-      body: fetchedTemplate
+      body: fetchedTemplate.toString('utf8')
     })
   } catch (error) {
     process.exitCode = 1
