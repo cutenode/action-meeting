@@ -16,10 +16,11 @@ async function action () {
   const observers = core.getInput('observers')
 
   // next, setting up Octokit via @actions/github
+  const octokit = new github.GitHub(token)
   const context = github.context
 
   // now, create a meeting issue
-  const newIssue = await octokit.issues.create({
+  await octokit.issues.create({
     ...context.repo,
     title: 'My Meeting',
     body: 'let\'s meet'
