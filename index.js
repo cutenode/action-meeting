@@ -18,14 +18,16 @@ async function action () {
   const octokit = new github.GitHub(token)
   const context = github.context
 
-  const fetchedTemplate = await fs.readFile(template)
-
   // now, create a meeting issue
   try {
+    const fetchedTemplate = await fs.readFile(template)
+
+    core.info(fetchedTemplate)
+
     await octokit.issues.create({
       ...context.repo,
       title: 'My Meeting',
-      body: fetchedTemplate
+      body: 'hilo'
     })
   } catch (error) {
     process.exitCode = 1
