@@ -1,0 +1,19 @@
+name: Meeting
+author: Tierney Cyren (@bnb)
+description: A GitHub Action to create issues that detail meetings
+inputs:
+    markdown-join-instructions:
+        description: 'Path to checked-in Markdown file detailing how folks can join the meeting. Generally, ~/.github/meeting/ is going to be the best location.'
+        required: true
+    markdown-minutes-base:
+        description: 'Path to checked-in Markdown file defining the structure of the agenda. Generally, ~/.github/meeting/ is going to be the best location.'
+        required: true
+    github-token:
+        description: 'GitHub Token used for authentication. The value of this should be `${{ secrets.GITHUB_TOKEN }}"'
+        required: true
+    invites:
+        description: 'People or Teams to invite via @mention'
+        required: false
+    observers:
+        description: 'People or Teams to invite via @mention'
+        required: false
