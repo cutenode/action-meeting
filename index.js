@@ -22,7 +22,7 @@ async function action () {
   // // fetch the template and make it a string
   // const fetchedTemplate = await fs.readFile(template)
   // const stringifiedTemplate = await fetchedTemplate.toString('utf8')
-  const stringifiedTemplate = stringifyMarkdownTemplate(template)
+  const stringifiedTemplate = await stringifyMarkdownTemplate(template)
 
   // now, create a meeting issue
   try {
