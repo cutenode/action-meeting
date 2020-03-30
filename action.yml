@@ -17,6 +17,9 @@ inputs:
     agenda-label:
         description: 'GitHub label to build the agenda off of. All issues that'
         required: true
+    meeting-label:
+        description: 'GitHub label to add to the created issue.'
+        required: true
     invites:
         description: 'String of people or teams to invite via @mention'
         required: false
