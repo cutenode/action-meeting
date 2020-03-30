@@ -1,7 +1,7 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const replaceVariables = require('./lib/replaceVariables')
-const fs = require('fs').promises
+const stringifyMarkdownTemplate = require('./lib/stringifyMarkdownTemplate')
 
 async function action () {
   // Starting off by pulling in all of our required inputs
@@ -59,11 +59,3 @@ async function action () {
 }
 
 action()
-
-async function stringifyMarkdownTemplate (template) {
-  // fetch the passed template and make it a string
-  const fetchedTemplate = await fs.readFile(template)
-  const stringifiedTemplate = await fetchedTemplate.toString('utf8')
-
-  return stringifiedTemplate
-}
