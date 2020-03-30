@@ -1,5 +1,6 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
+const replaceVariables = require('./lib/replaceVariables')
 const fs = require('fs').promises
 
 async function action () {
@@ -18,9 +19,10 @@ async function action () {
   const octokit = new github.GitHub(token)
   const context = github.context
 
-  // fetch the template and make it a string
-  const fetchedTemplate = await fs.readFile(template)
-  const stringifiedTemplate = await fetchedTemplate.toString('utf8')
+  // // fetch the template and make it a string
+  // const fetchedTemplate = await fs.readFile(template)
+  // const stringifiedTemplate = await fetchedTemplate.toString('utf8')
+  stringifyMarkdownTemplate(template)
 
   // now, create a meeting issue
   try {
@@ -60,43 +62,10 @@ async function action () {
 
 action()
 
-async function replaceVariables (stringifiedTemplate, templateVariables, templateValues) {
-  // replace each template variable with the relevant variable
-
-  // - replace title
-  if (stringifiedTemplate.includes(templateVariables.title)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.title, templateValues.title)
-  }
-
-  // - replace github issue
-  if (stringifiedTemplate.includes(templateVariables.githubIssue)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.githubIssue, templateValues.githubIssue)
-  }
-
-  // - replace minutes document
-  if (stringifiedTemplate.includes(templateVariables.minutesDocument)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.minutesDocument, templateValues.minutesDocument)
-  }
-
-  // - replace agenda label
-  if (stringifiedTemplate.includes(templateVariables.agendaLabel)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.agendaLabel, templateValues.agendaLabel)
-  }
-
-  // - replace invited
-  if (stringifiedTemplate.includes(templateVariables.invited)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.invited, templateValues.invited)
-  }
-
-  // - replace observers
-  if (stringifiedTemplate.includes(templateVariables.observers)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.observers, templateValues.observers)
-  }
-
-  // - replace agenda
-  if (stringifiedTemplate.includes(templateVariables.agenda)) {
-    stringifiedTemplate = stringifiedTemplate.replace(templateVariables.agenda, templateValues.agenda)
-  }
+async function stringifyMarkdownTemplate (template) {
+  // fetch the passed template and make it a string
+  const fetchedTemplate = await fs.readFile(template)
+  const stringifiedTemplate = await fetchedTemplate.toString('utf8')
 
   return stringifiedTemplate
 }
