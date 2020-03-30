@@ -54,7 +54,8 @@ async function action () {
     await octokit.issues.create({
       ...context.repo,
       title: 'My Meeting',
-      body: bodyToReturn
+      body: bodyToReturn,
+      label: meetingLabel
     })
   } catch (error) {
     process.exitCode = 1
