@@ -55,7 +55,7 @@ async function action () {
       ...context.repo,
       title: 'My Meeting',
       body: bodyToReturn,
-      labels: meetingLabel
+      labels: 'meeting'
     })
   } catch (error) {
     process.exitCode = 1
