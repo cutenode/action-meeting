@@ -22,7 +22,7 @@ async function action () {
   // // fetch the template and make it a string
   // const fetchedTemplate = await fs.readFile(template)
   // const stringifiedTemplate = await fetchedTemplate.toString('utf8')
-  stringifyMarkdownTemplate(template)
+  const stringifiedTemplate = stringifyMarkdownTemplate(template)
 
   // now, create a meeting issue
   try {
@@ -46,8 +46,6 @@ async function action () {
     }
 
     const bodyToReturn = await replaceVariables(stringifiedTemplate, templateVariables, templateValues)
-
-    core.info(fetchedTemplate)
 
     await octokit.issues.create({
       ...context.repo,
