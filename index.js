@@ -56,7 +56,7 @@ async function action () {
       ...context.repo,
       title: 'My Meeting',
       body: bodyToReturn,
-      labels: 'meeting'
+      labels: ['meeting']
     })
   } catch (error) {
     catchError(error)
