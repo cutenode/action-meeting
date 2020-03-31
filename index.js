@@ -2,6 +2,7 @@ const core = require('@actions/core')
 const github = require('@actions/github')
 const replaceVariables = require('./lib/replaceVariables')
 const stringifyMarkdownTemplate = require('./lib/stringifyMarkdownTemplate')
+const catchError = require('./lib/catchError')
 
 async function action () {
   // Starting off by pulling in all of our required inputs
@@ -58,8 +59,7 @@ async function action () {
       labels: 'meeting'
     })
   } catch (error) {
-    process.exitCode = 1
-    core.setFailed(error)
+    catchError(error)
   }
 }
 
