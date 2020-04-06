@@ -24,5 +24,8 @@ inputs:
         description: 'String of people or teams to invite via @mention'
         required: false
     observers:
-        description: 'String of people or teams to invite via @mention'
+        description: 'String of people or teams to invite as observers via @mention'
+        required: false
+    organization:
+        description: 'The GitHub Organization that will be searched for the `meeting-label`.'
         required: false

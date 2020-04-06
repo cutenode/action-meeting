@@ -17,16 +17,20 @@ async function action () {
   const meetingLabel = core.getInput('meeting-label')
   const invites = core.getInput('invites')
   const observers = core.getInput('observers')
+  const org = core.getInput('organization')
 
   // next, setting up Octokit via @actions/github
   const octokit = new github.GitHub(token)
   const context = github.context
 
-  // // fetch the template and make it a string
+  // fetch the template and make it a string
   // const fetchedTemplate = await fs.readFile(template)
   // const stringifiedTemplate = await fetchedTemplate.toString('utf8')
   const stringifiedTemplate = await stringifyMarkdownTemplate(base)
   const stringifiedJoin = await stringifyMarkdownTemplate(join)
+
+  // build the agenda from the information passed to us
+  const agenda = buildAgenda(org, meetingLabel, token)
 
   // now, create a meeting issue
   try {
@@ -38,7 +42,8 @@ async function action () {
       agendaLabel: '{{{agenda-label}}}',
       meetingLabel: '{{{meeting-label}}}',
       invited: '{{{invited}}}',
-      agenda: '{{{agenda}}}'
+      agenda: '{{{agenda}}}',
+      org: '{{{org}}}'
     }
 
     const templateValues = {
@@ -50,7 +55,8 @@ async function action () {
       meetingLabel: meetingLabel,
       invited: invites,
       observers: observers,
-      agenda: 'the agenda generated from the passed label will be added here'
+      agenda: agenda,
+      org: org
     }
 
     const bodyToReturn = await replaceVariables(stringifiedTemplate, templateVariables, templateValues)
@@ -60,9 +66,6 @@ async function action () {
       title: 'My Meeting',
       body: bodyToReturn,
       labels: ['meeting']
-    }, (response) => {
-      core.debug('Octokit response:')
-      core.debug(response.toString())
     })
   } catch (error) {
     catchError(error)
@@ -70,3 +73,14 @@ async function action () {
 }
 
 action()
+
+async function buildAgenda (organization, labelToSearchFor, token) {
+  // next, setting up Octokit via @actions/github
+  const octokit = new github.GitHub(token)
+
+  const labeledIssuesAndPullRequests = await octokit.search.issuesAndPullRequests({
+    q: `org:${organization} label:"${labelToSearchFor}"`
+  })
+
+  return labeledIssuesAndPullRequests
+}
