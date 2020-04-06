@@ -14,6 +14,9 @@
   },
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "@actions/github": "^2.1.1"
+    "@actions/github": "^2.1.1",
+    "google-auth-library": "^6.0.0",
+    "open": "^7.0.3",
+    "server-destroy": "^1.0.1"
   }
 }
