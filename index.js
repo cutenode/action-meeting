@@ -61,7 +61,7 @@ async function action () {
       body: bodyToReturn,
       labels: ['meeting']
     }, (response) => {
-      console.log(response)
+      core.debug(response)
     })
   } catch (error) {
     catchError(error)
