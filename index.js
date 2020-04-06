@@ -61,6 +61,7 @@ async function action () {
       body: bodyToReturn,
       labels: ['meeting']
     }, (response) => {
+      core.debug('Octokit response:')
       core.debug(response.toString())
     })
   } catch (error) {
