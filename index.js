@@ -60,6 +60,8 @@ async function action () {
       title: 'My Meeting',
       body: bodyToReturn,
       labels: ['meeting']
+    }, (response) => {
+      console.log(response)
     })
   } catch (error) {
     catchError(error)
