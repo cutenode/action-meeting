@@ -55,7 +55,7 @@ async function action () {
       meetingLabel: meetingLabel,
       invited: invites,
       observers: observers,
-      agenda: agenda,
+      agenda: JSON.stringify(agenda, null, 2),
       org: org
     }
 
