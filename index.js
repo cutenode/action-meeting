@@ -82,5 +82,15 @@ async function buildAgenda (organization, labelToSearchFor, token) {
     q: `org:${organization} label:"${labelToSearchFor}"`
   })
 
-  return labeledIssuesAndPullRequests
+  const arrayOfIssuedata = []
+
+  const titles = labeledIssuesAndPullRequests.data.items.forEach((entry) => {
+    const issueData = {
+      title: entry.title
+    }
+
+    arrayOfIssuedata.push(issueData)
+  })
+
+  return titles
 }
