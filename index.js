@@ -30,7 +30,7 @@ async function action () {
   const stringifiedJoin = await stringifyMarkdownTemplate(join)
 
   // build the agenda from the information passed to us
-  const agenda = buildAgenda(org, meetingLabel, token)
+  const agenda = await buildAgenda(org, meetingLabel, token)
 
   // now, create a meeting issue
   try {
