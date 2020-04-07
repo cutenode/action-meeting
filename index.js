@@ -78,13 +78,16 @@ async function buildAgenda (organization, labelToSearchFor, token) {
   // next, setting up Octokit via @actions/github
   const octokit = new github.GitHub(token)
 
+  // run our query against the public GitHub API
   const labeledIssuesAndPullRequests = await octokit.search.issuesAndPullRequests({
     q: `org:${organization} label:"${labelToSearchFor}"`
   })
 
+  // initialize our an array that we're going to populate
   const arrayOfIssuedata = []
 
-  const titles = labeledIssuesAndPullRequests.data.items.forEach((entry) => {
+  // loop over our query
+  labeledIssuesAndPullRequests.data.items.forEach((entry) => {
     const issueData = {
       title: entry.title
     }
@@ -92,5 +95,6 @@ async function buildAgenda (organization, labelToSearchFor, token) {
     arrayOfIssuedata.push(issueData)
   })
 
-  return titles
+  // return our built data
+  return arrayOfIssuedata
 }
